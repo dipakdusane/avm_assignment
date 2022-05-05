@@ -1,0 +1,41 @@
+How do you set up a script to run every time a repository receives new commits through push?
+	cd .git/hooks/
+	vi pre-push
+	Write the script in above file
+	chmod +x pre-push
+
+How do you find a list of files that have changed in a particular commit?
+	git show --name-only <commit_id>
+
+
+Monitor a log file, detect a pattern detection, send an email on detection
+Please check shell script monit.sh
+
+Monitor process particular process on an instance, send an email on incase of state change like process got stopped, taking more CPU that threshold
+Please check python script monit_process.py
+
+
+Create a sample docker container with a Node.js Express app and demonstrate the installation.
+Guidelines :
+● You should be able to find what system packages are needed by looking through the app
+● You should not need to change the app code in any way
+● The app should be running as a non-privileged user
+  -> add a non root user to Dockerfile switch to that user
+● The app should be automatically restarted if crashes or is killed
+  -> set the --restart=always while running container 
+● The app should maximize all of the available CPUs
+  -> pass --cpus option while running the container
+● Timezone should be in IST
+  -> install tzdata, set TZ env variable to required timezone (ASIA/KOLKATA for IST)
+  -> add soft linking as below
+     RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+● Follow best practices when writing a dockerfile
+
+Please check the Dockerfile and musician-app nodejs application
+
+
+1. Show how to block ports
+sudo iptables -D OUTPUT -o eth0 -p tcp --dport 80 -j DROP
+
+2. Show how to setup port forwarding
+sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
